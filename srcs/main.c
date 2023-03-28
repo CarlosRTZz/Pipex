@@ -6,7 +6,7 @@
 /*   By: carlosortiz <carlosortiz@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/17 11:36:14 by cortiz            #+#    #+#             */
-/*   Updated: 2023/03/25 15:21:52 by carlosortiz      ###   ########.fr       */
+/*   Updated: 2023/03/28 03:46:19 by carlosortiz      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,11 +23,14 @@ void	init_files(t_pipex *pipex, char **av)
 	pipex->file2 = open(av[4], O_RDWR | O_TRUNC | O_CREAT, 0664);
 	if (pipex->file2 < 0)
 	{	
+		close(pipex->file1);
 		perror("Error outfile ");
 		exit(EXIT_FAILURE);
 	}
 	if (pipe(pipex->pipe) == -1)
 	{
+		close(pipex->file1);
+		close(pipex->file2);
 		perror("Pipe error ");
 		exit(EXIT_FAILURE);
 	}
@@ -37,10 +40,20 @@ void	init_cmd(t_pipex *pipex, char **av)
 {
 	pipex->command1 = ft_split(av[2], ' ');
 	if (!*pipex->command1)
+	{
+		close(pipex->file1);
+		close(pipex->file2);
+		close(pipex->pipe[0]);
+		close(pipex->pipe[1]);
 		print_error("First command is NULL");
+	}
 	pipex->command2 = ft_split(av[3], ' ');
 	if (!*pipex->command2)
 	{
+		close(pipex->file1);
+		close(pipex->file2);
+		close(pipex->pipe[0]);
+		close(pipex->pipe[1]);
 		free_tab(pipex->command1);
 		print_error("Second command is NULL");
 	}
@@ -51,6 +64,10 @@ void	init_path(t_pipex *pipex, char **envp)
 	pipex->path1 = get_path(pipex->command1[0], envp);
 	if (pipex->path1 == 0)
 	{
+		close(pipex->file1);
+		close(pipex->file2);
+		close(pipex->pipe[0]);
+		close(pipex->pipe[1]);
 		free_tab(pipex->command1);
 		free_tab(pipex->command2);
 		print_error("First command doesn't exist");
@@ -58,9 +75,13 @@ void	init_path(t_pipex *pipex, char **envp)
 	pipex->path2 = get_path(pipex->command2[0], envp);
 	if (pipex->path2 == 0)
 	{
+		free(pipex->path1);
+		close(pipex->file1);
+		close(pipex->file2);
+		close(pipex->pipe[0]);
+		close(pipex->pipe[1]);
 		free_tab(pipex->command1);
 		free_tab(pipex->command2);
-		free(pipex->path1);
 		print_error("Second command doesn't exist");
 	}
 }
@@ -74,7 +95,7 @@ void	init_pipe(t_pipex *pipex, char **av, char **envp)
 
 int	main(int ac, char **av, char **envp)
 {
-	t_pipex pipex;
+	t_pipex	pipex;
 
 	if (ac != 5)
 		print_error("Wrong numbers of args");

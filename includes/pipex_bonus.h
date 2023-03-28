@@ -1,11 +1,11 @@
 #ifndef PIPEX_BONUS_H
 # define PIPEX_BONUS_H
 
-#include "libft.h"
-#include "get_next_line.h"
-#include <fcntl.h>
-#include <stdio.h>
-#include <errno.h>
+# include "libft.h"
+# include "get_next_line.h"
+# include <fcntl.h>
+# include <stdio.h>
+# include <errno.h>
 
 typedef struct s_pipbonus
 {
@@ -28,6 +28,6 @@ char	*get_path(char *cmd, char **envp);
 void	init_files(char **av, int ac, t_pipbonus *pipex);
 void	init_cmds(char **av, int ac, t_pipbonus *pipex);
 void	init_path(char **envp, t_pipbonus *pipex);
-void	ft_exit(t_pipbonus *pip, int exitc);
+void	ft_exit(t_pipbonus *pip, int exitc, int want);
 
 #endif

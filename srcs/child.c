@@ -43,7 +43,7 @@ char	*get_path(char *cmd, char **envp)
 	return (NULL);
 }
 
-void	create_child(t_pipex pipex ,char **envp)
+void	create_child(t_pipex pipex, char **envp)
 {
 	dup2(pipex.pipe[1], 1);
 	close(pipex.pipe[0]);

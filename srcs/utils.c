@@ -22,9 +22,9 @@ void	print_error(char *str)
 void	end_struct(t_pipex *pipex)
 {
 	close(pipex->file1);
-    close(pipex->file2);
-    free(pipex->path1);
-    free(pipex->path2);
-    free_tab(pipex->command1);
-    free_tab(pipex->command2);
+	close(pipex->file2);
+	free(pipex->path1);
+	free(pipex->path2);
+	free_tab(pipex->command1);
+	free_tab(pipex->command2);
 }
