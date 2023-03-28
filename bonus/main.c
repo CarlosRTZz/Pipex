@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: carlosortiz <carlosortiz@student.42.fr>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/03/28 23:48:46 by carlosortiz       #+#    #+#             */
+/*   Updated: 2023/03/28 23:59:52 by carlosortiz      ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "pipex_bonus.h"
 
 void	check_args(int ac, char **av, t_pipbonus *pipex)
@@ -9,20 +21,16 @@ void	check_args(int ac, char **av, t_pipbonus *pipex)
 	if (ac < 5 + pipex->here_doc)
 	{
 		ft_putstr_fd("Wrong number of arguments\n", 2);
-		ft_exit(pipex, 2, 0);
+		ft_exit(pipex, 1, 0);
 	}
 }
 
 void	close_pipes(t_pipbonus *pipex, int n)
 {
-	int	i;
-
-	i = 0;
-	while (i <= n && pipex->pipes[i])
+	while (--n >= 0 && pipex->pipes[n])
 	{
-		close(pipex->pipes[i][0]);
-		close(pipex->pipes[i][1]);
-		i++;
+		close(pipex->pipes[n][0]);
+		close(pipex->pipes[n][1]);
 	}
 }
 
@@ -35,20 +43,20 @@ void	init_pipes(t_pipbonus *pipex)
 	if (!pipex->pipes)
 	{
 		ft_putstr_fd("Malloc Error\n", 2);
-		ft_exit(pipex, 2, 0);
+		ft_exit(pipex, 1, 0);
 	}
-	pipex->pipes[i] = NULL;
+	pipex->pipes[pipex->nbscmds - 1] = NULL;
 	while (i < pipex->nbscmds - 1)
 	{
 		pipex->pipes[i] = malloc(sizeof(int) * 2);
 		if (!pipex->pipes[i])
 		{
 			ft_putstr_fd("Malloc Error\n", 2);
-			ft_exit(pipex, 2, 0);
+			ft_exit(pipex, 1, 0);
 		}
 		ft_memset(pipex->pipes[i], 0, sizeof(int) * 2);
 		if (pipe(pipex->pipes[i]) == -1)
-			ft_exit(pipex, 2, 1);
+			ft_exit(pipex, 1, 1);
 		i++;
 	}
 }
@@ -99,11 +107,11 @@ int	main(int ac, char **av, char **envp)
 	if (!pipex.pids)
 	{
 		ft_putstr_fd("Malloc error\n", 2);
-		ft_exit(&pipex, 2, 0);
+		ft_exit(&pipex, 1, 0);
 	}
 	while (++i < pipex.nbscmds)
 		create_child(&pipex, envp, i);
 	close_pipes(&pipex, pipex.nbscmds - 1);
 	waitpid(-1, NULL, 0);
-	ft_exit(&pipex, 1, 0);
+	ft_exit(&pipex, 0, 0);
 }

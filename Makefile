@@ -1,7 +1,7 @@
 NAME = pipex
 
 CC = gcc
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror -fsanitize=address -g
 RM = rm -rf
 
 INC_DIR = -I includes

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   utils.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: carlosortiz <carlosortiz@student.42.fr>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/03/28 23:49:03 by carlosortiz       #+#    #+#             */
+/*   Updated: 2023/03/28 23:49:43 by carlosortiz      ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "pipex_bonus.h"
 
 void	print_error(char *str)
@@ -20,19 +32,6 @@ void	free_tab(char **tab)
 		}
 		free(tab);
 	}
-}
-
-void	free_pipes(int **tab)
-{
-	int	i;
-
-	i = 0;
-	while (tab[i])
-	{
-		free(tab[i]);
-		i++;
-	}
-	free(tab);
 }
 
 char	*get_all_path(char **envp)

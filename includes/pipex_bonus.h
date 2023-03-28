@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   pipex_bonus.h                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: carlosortiz <carlosortiz@student.42.fr>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/03/28 23:49:08 by carlosortiz       #+#    #+#             */
+/*   Updated: 2023/03/28 23:49:48 by carlosortiz      ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef PIPEX_BONUS_H
 # define PIPEX_BONUS_H
 
@@ -22,7 +34,6 @@ typedef struct s_pipbonus
 void	print_error(char *str);
 void	free_tab(char **tab);
 void	close_pipes(t_pipbonus *pipex, int i);
-void	free_pipes(int **tab);
 char	*get_all_path(char **envp);
 char	*get_path(char *cmd, char **envp);
 void	init_files(char **av, int ac, t_pipbonus *pipex);
