@@ -12,10 +12,10 @@ SRCS = main.c \
        utils.c \
        child.c
 
-SRCS_BONUS = main.c \
-             utils.c \
-             Error.c \
-             init_struct.c \
+SRCS_BONUS = main_bonus.c \
+             utils_bonus.c \
+             error_bonus.c \
+             init_struct_bonus.c \
              get_next_line_utils.c \
              get_next_line.c
 

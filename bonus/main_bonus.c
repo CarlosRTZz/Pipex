@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   main_bonus.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: carlosortiz <carlosortiz@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/28 23:48:46 by carlosortiz       #+#    #+#             */
-/*   Updated: 2023/03/28 23:59:52 by carlosortiz      ###   ########.fr       */
+/*   Updated: 2023/03/29 13:22:02 by carlosortiz      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,11 +82,7 @@ void	create_child(t_pipbonus *pipex, char **envp, int i)
 			dup2(pipex->pipes[i][1], 1);
 		}
 		close_pipes(pipex, pipex->nbscmds - 1);
-		if (execve(pipex->path[i], pipex->cmds[i], envp) == -1)
-		{
-			perror("Erreur ?");
-			exit(EXIT_FAILURE);
-		}
+		execve(pipex->path[i], pipex->cmds[i], envp);
 	}
 }
 
