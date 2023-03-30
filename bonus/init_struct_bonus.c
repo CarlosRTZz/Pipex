@@ -6,7 +6,7 @@
 /*   By: carlosortiz <carlosortiz@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/28 23:48:56 by carlosortiz       #+#    #+#             */
-/*   Updated: 2023/03/29 13:21:58 by carlosortiz      ###   ########.fr       */
+/*   Updated: 2023/03/30 22:43:30 by carlosortiz      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void	here_doc(char **av, t_pipbonus *pipex)
 
 void	init_files(char **av, int ac, t_pipbonus *pipex)
 {
-	if (ft_strncmp(av[1], "here_doc", 8) == 0)
+	if (pipex->here_doc == 1)
 		here_doc(av, pipex);
 	else
 	{

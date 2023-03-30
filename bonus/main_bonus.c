@@ -6,7 +6,7 @@
 /*   By: carlosortiz <carlosortiz@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/28 23:48:46 by carlosortiz       #+#    #+#             */
-/*   Updated: 2023/03/29 13:22:02 by carlosortiz      ###   ########.fr       */
+/*   Updated: 2023/03/30 22:43:38 by carlosortiz      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,9 @@
 
 void	check_args(int ac, char **av, t_pipbonus *pipex)
 {
-	if (!ft_strncmp("here_doc", av[1], 8))
+	if (ac == 1)
+		ft_exit(pipex, 1, 0);
+	if (!ft_strncmp("here_doc", av[1], 8) && (ft_strlen(av[1]) == 8))
 		pipex->here_doc = 1;
 	else
 		pipex->here_doc = 0;
